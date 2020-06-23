@@ -1,5 +1,6 @@
 package com.shizhenqiang.arithmetic.leetcode.day01;
 
+
 /**
  * 假设你正在爬楼梯。需要 n 阶你才能到达楼顶。
  * <p>
@@ -27,7 +28,7 @@ package com.shizhenqiang.arithmetic.leetcode.day01;
  * 链接：https://leetcode-cn.com/problems/climbing-stairs
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-public class ClimbStairs {
+public class ClimbStairs03 {
 
     public static void main(String[] args) {
         // 1、简单的方法
@@ -50,7 +51,6 @@ public class ClimbStairs {
         System.out.println("矩阵方法：" + n);
     }
 
-    // 5、矩阵方法
     private static int matrixClimbStairs(int n) {
         int[][] q = {{1, 1}, {1, 0}};
         int[][] res = pow(q, n);
@@ -64,50 +64,46 @@ public class ClimbStairs {
                 ret = multiply(ret, q);
             }
             n >>= 1;
-            q = multiply(q,q);
+            q  = multiply(q,q);
         }
         return ret;
     }
 
     private static int[][] multiply(int[][] a, int[][] b) {
-        int[][] c = new int[2][2];
-        for (int i = 0; i < 2; i++) {
-            for (int j = 0; j < 2; j++) {
-                c[i][j] = a[i][0] * b [0][j] + a[i][1] * b[1][j];
+        int [][]c = new int[2][2];
+        for (int i = 0; i <2 ; i++) {
+            for (int j = 0; j < 2; j ++) {
+                c[i][j] = a[i][0] * b[0][j] + a[i][1] * b[1][j];
             }
         }
         return c;
     }
 
-    // 4、 斐波那契数列通项公式 Binets Formula
     private static int fibonacciSequence(int n) {
+        // 求平方根
         double sqrt = Math.sqrt(n);
-        double result = Math.pow((1 + sqrt) / 2, n + 1) - Math.pow((1 - sqrt) / 2, n + 1);
-        return (int) (result / sqrt);
+        // 求第一个参数的第二个参数的次方
+        double pow = Math.pow((1 + sqrt) / 2, n + 1) + Math.pow((1 - sqrt) / 2, n + 1);
+        return (int) (pow / sqrt);
     }
 
-
-    // 3、记忆递归方法
     private static int climbStairsOfRecursionMemory(int n) {
         int[] memo = new int[n + 1];
-        return climbStairsMemo(n, memo);
+        return recursionMemory(n, memo);
+
     }
 
-    private static int climbStairsMemo(int n, int[] memo) {
+    private static int recursionMemory(int n, int[] memo) {
         if (memo[n] > 0) {
             return memo[n];
         }
-        if (n <= 1) {
-            memo[n] = 1;
-        } else if (n <= 2) {
-            memo[n] = 2;
-        } else {
-            memo[n] = climbStairsMemo(n - 1, memo) + climbStairsMemo(n - 2, memo);
+        if (n <= 2) {
+            return n;
         }
-        return memo[n];
+
+        return recursionMemory(n - 1, memo) + recursionMemory(n - 2, memo);
     }
 
-    // 2、递归方法
     private static int climbStairsOfRecursion(int n) {
         if (n <= 2) {
             return n;
@@ -115,23 +111,17 @@ public class ClimbStairs {
         return climbStairsOfRecursion(n - 1) + climbStairsOfRecursion(n - 2);
     }
 
-
-    // 1、简单的方法
-    public static int climbStairs(int step) {
-        if (step <= 2) {
-            return step;
+    private static int climbStairs(int n) {
+        int a = 0;
+        int b = 0;
+        int res = 1;
+        for (int i = 1; i <= n; i++) {
+            a = b;
+            b = res;
+            res = a + b;
         }
-
-        int stair1 = 1;
-        int stair2 = 2;
-        int result = 0;
-        for (int i = 3; i <= step; i++) {
-            result = stair1 + stair2;
-            stair1 = stair2;
-            stair2 = result;
-        }
-        return result;
-
+        return res;
     }
+
 
 }
