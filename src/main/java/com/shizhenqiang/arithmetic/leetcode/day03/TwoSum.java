@@ -34,11 +34,11 @@ public class TwoSum {
     }
 
     private static int[] calculateSumTwo(int[] array, int target) {
-        for (int i =0; i < array.length; i++) {
+        for (int i = 0; i < array.length; i++) {
             int num = target - array[i];
-            for (int j = 0; j< array.length; j++) {
+            for (int j = 0; j < array.length; j++) {
                 if (i != j && num == array[j]) {
-                    return new int[] {i, j};
+                    return new int[]{i, j};
                 }
             }
         }
@@ -50,9 +50,9 @@ public class TwoSum {
         for (int i = 0; i < array.length; i++) {
             int num = target - array[i];
             if (map.containsKey(num) && map.get(num) != i) {
-                return new int[] {map.get(num), i};
+                return new int[]{map.get(num), i};
             }
-            map.put(array[i], i);
+            map.putIfAbsent(array[i], i);
         }
         return null;
     }
