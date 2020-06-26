@@ -1,4 +1,4 @@
-package com.shizhenqiang.arithmetic.leetcode.day04;
+package com.shizhenqiang.arithmetic.leetcode.day05;
 
 
 public class ListNode {
