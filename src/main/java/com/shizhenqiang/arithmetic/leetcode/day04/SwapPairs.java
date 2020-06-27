@@ -1,4 +1,4 @@
-package com.shizhenqiang.arithmetic.arithmetic.day04;
+package com.shizhenqiang.arithmetic.leetcode.day04;
 
 
 /**
