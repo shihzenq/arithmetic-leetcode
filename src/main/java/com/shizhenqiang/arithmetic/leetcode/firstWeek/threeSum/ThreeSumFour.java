@@ -1,7 +1,6 @@
 package com.shizhenqiang.arithmetic.leetcode.firstWeek.threeSum;
 
 
-import com.sun.org.apache.xalan.internal.xsltc.dom.AdaptiveResultTreeImpl;
 
 import java.util.ArrayList;
 import java.util.Arrays;

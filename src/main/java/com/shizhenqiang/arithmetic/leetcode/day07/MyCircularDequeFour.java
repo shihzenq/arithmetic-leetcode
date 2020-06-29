@@ -36,64 +36,35 @@ package com.shizhenqiang.arithmetic.leetcode.day07;
  * 请不要使用内置的双端队列库。
  * https://leetcode-cn.com/problems/design-circular-deque/
  */
-public class MyCircularDeque<E> {
+public class MyCircularDequeFour<E> {
 
-    /**
-     * the capacity bound, 1 or 1000 if none
-     */
-    private final int k;
+    private int k;
 
+    private int size;
 
-    transient int size = 0;
-
-    /**
-     * Linked list node class.
-     */
-    static final class Node<E> {
-        /**
-         * The item, or null if this node has been removed.
-         */
-        Integer item;
-
-        /**
-         * One of:
-         * - the real predecessor Node
-         * - this Node, meaning the predecessor is tail
-         * - null, meaning there is no predecessor
-         */
+    static class Node<E> {
         Node<E> prev;
 
-        /**
-         * One of:
-         * - the real successor Node
-         * - this Node, meaning the successor is head
-         * - null, meaning there is no successor
-         */
+        Integer item;
+
         Node<E> next;
 
-        Node(Node<E> prev, Integer element, Node<E> next) {
-            this.item = element;
-            this.next = next;
+        public Node(Node<E> prev, Integer item, Node<E> next) {
             this.prev = prev;
+            this.item = item;
+            this.next = next;
         }
     }
 
+    private Node<E> first;
 
-    transient Node<E> first;
+    private Node<E> last;
 
-    /**
-     * Pointer to last node.
-     */
-    transient Node<E> last;
 
     /**
      * Initialize your data structure here. Set the size of the deque to be k.
      */
-    public MyCircularDeque(int k) {
-//        Node<E> newNode = new Node<>(null, k, null);
-//        first = newNode;
-//        last = newNode;
-//        size ++;
+    public MyCircularDequeFour(int k) {
         this.k = k;
     }
 
@@ -104,13 +75,12 @@ public class MyCircularDeque<E> {
         if (isFull()) {
             return false;
         }
-        final Node<E> f = first;
-        final Node<E> newNode = new Node<E>(null, value, f);
+        Node<E> f = first;
+        Node<E> newNode = new Node<>(null, value, f);
         first = newNode;
-        if (f == null)
+        if (f == null) {
             last = newNode;
-        else
-            f.prev = newNode;
+        } else f.prev = newNode;
         size++;
         return true;
     }
@@ -122,13 +92,12 @@ public class MyCircularDeque<E> {
         if (isFull()) {
             return false;
         }
-        final Node<E> l = last;
-        final Node<E> newNode = new Node<>(l, value, null);
+        Node<E> l = last;
+        Node<E> newNode = new Node<>(l, value, null);
         last = newNode;
-        if (l == null)
+        if (l == null) {
             first = newNode;
-        else
-            l.next = newNode;
+        } else l.next = newNode;
         size++;
         return true;
     }
@@ -137,19 +106,17 @@ public class MyCircularDeque<E> {
      * Deletes an item from the front of Deque. Return true if the operation is successful.
      */
     public boolean deleteFront() {
-        final Node<E> f = first;
-        if (f == null) {
+        if (isEmpty()) {
             return false;
         }
-        // assert f == first && f != null;
-        final Node<E> next = f.next;
+        Node<E> f = first;
+        Node<E> next = f.next;
         f.item = null;
-        f.next = null; // help GC
+        f.next = null;
         first = next;
-        if (next == null)
+        if (next == null) {
             last = null;
-        else
-            next.prev = null;
+        } else next.prev = null;
         size--;
         return true;
     }
@@ -158,42 +125,40 @@ public class MyCircularDeque<E> {
      * Deletes an item from the rear of Deque. Return true if the operation is successful.
      */
     public boolean deleteLast() {
-        final Node<E> l = last;
-        if (l == null) {
+        if (isEmpty()) {
             return false;
         }
-        final Node<E> prev = l.prev;
+        Node<E> l = last;
+        Node<E> prev = l.prev;
         l.item = null;
-        l.prev = null; // help GC
+        l.prev = null;
         last = prev;
-        if (prev == null)
+        if (prev == null) {
             first = null;
-        else
-            prev.next = null;
+        } else prev.next = null;
         size--;
         return true;
     }
+
 
     /**
      * Get the front item from the deque.
      */
     public int getFront() {
-        final Node<E> f = first;
-        if (f == null) {
-            return  -1;
+        if (isEmpty()) {
+            return -1;
         }
-        return f.item;
+        return first.item;
     }
 
     /**
      * Get the last item from the deque.
      */
     public int getRear() {
-        final Node<E> l = last;
-        if (null == l) {
+        if (isEmpty()) {
             return -1;
         }
-        return l.item;
+        return last.item;
     }
 
     /**
