@@ -1,4 +1,4 @@
-package com.shizhenqiang.arithmetic.leetcode.firstWeek;
+package com.shizhenqiang.arithmetic.leetcode.day11;
 
 /**
  * 盛最多水的容器
@@ -36,25 +36,36 @@ public class MaxArea {
         System.out.println(a);
     }
 
-    private static int maxAreaTwo(int[] array) {
-        int max = 0;
-        for (int i = 0, j = array.length - 1; i < j; ) {
-            int minHeight = array[i] <  array[j] ? array[i++] : array[j--];
-            int area = (j - i +1) * minHeight;
-            max = Math.max(area, max);
-        }
-        return max;
-    }
-
-    private static int maxAreaOne(int[] array) {
-        // 求最大面试， 并且i和j不相等
-        int max = 0;
-        for (int i = 0; i < array.length - 1; i++) {
-            for (int j = i + 1; j < array.length; j++) {
-                int area = (j - i) * Math.min(array[i], array[j]);
-                max = Math.max(max, area);
+    private static int maxAreaTwo(int[] height) {
+        int maxArea = 0;
+        for (int i = 0; i < height.length; i++) {
+            for (int j = 0; j < height.length; j++) {
+                int min = Math.min(height[i], height[j]);
+                int area = min * (j -i);
+                maxArea = Math.max(maxArea, area);
             }
         }
-        return max;
+        return maxArea;
     }
+
+    private static int maxAreaOne(int[] height) {
+        int maxArea = 0;
+        int l = 0;
+        int r = height.length - 1;
+        while (l < r) {
+            // 计算最小的高 * 宽度 = 面积
+            int area = Math.min(height[l], height[r]) * (r - l);
+            System.out.println("min: " + area);
+            maxArea = Math.max(maxArea, area);
+            System.out.println("maxArea: " + maxArea);
+            if (height[l] <= height[r]) {
+                ++l;
+            } else {
+                --r;
+            }
+            System.out.println("---------------");
+        }
+        return maxArea;
+    }
+
 }
