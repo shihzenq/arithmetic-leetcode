@@ -3,7 +3,13 @@ package com.shizhenqiang.arithmetic.leetcode.secondWeek.Heap;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 
-
+/**
+ * 二叉堆
+ * 0. 根节点（顶堆元素）是：a[0]
+ * 1. 索引为i的左孩子的索引是（2*i+1）
+ * 2. 索引为i的右孩子是索引是（2*i+2）
+ * 3. 索引为i的父节点的索引是floor((i-1)/2)
+ */
 public class BinaryHeap {
 
 
