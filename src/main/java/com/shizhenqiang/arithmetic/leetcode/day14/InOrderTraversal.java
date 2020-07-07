@@ -26,12 +26,12 @@ public class InOrderTraversal {
 
     public static void main(String[] args) {
         TreeNode root = new TreeNode(5);
-        insert(root, 2);
-        insert(root, 4);
-        insert(root, 6);
-        insert(root, 8);
-        insert(root, 7);
-        insert(root, 3);
+        insert(root,2);
+        insert(root,3);
+        insert(root,4);
+        insert(root,7);
+        insert(root,8);
+        insert(root,6);
         List<Integer> list = inOrderTraversalOne(root);
         System.out.println(list);
         list = inOrderTraversalTwo(root);
