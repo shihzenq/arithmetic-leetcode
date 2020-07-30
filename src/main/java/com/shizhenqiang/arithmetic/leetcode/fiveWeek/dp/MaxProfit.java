@@ -26,4 +26,27 @@ package com.shizhenqiang.arithmetic.leetcode.fiveWeek.dp;
  * https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/#/description
  */
 public class MaxProfit {
+
+    public static void main(String[] args) {
+        MaxProfit maxProfit = new MaxProfit();
+        int profit = maxProfit.maxProfit(new int[]{7, 1, 5, 3, 6, 4});
+        System.out.println(profit);
+    }
+
+    public int maxProfit(int [] prices) {
+        if (prices == null || prices.length == 0) {
+            return 0;
+        }
+        int len = prices.length;
+        int max = 0;
+        int min = prices[0];
+        for (int i = 0; i < len; i ++) {
+            if (prices[i] < min) {
+                min = prices[i];
+            } else {
+                max = Math.max(max, prices[i] - min);
+            }
+        }
+        return max;
+    }
 }
