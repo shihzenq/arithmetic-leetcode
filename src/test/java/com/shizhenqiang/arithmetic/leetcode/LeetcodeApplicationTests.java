@@ -1,13 +1,10 @@
 package com.shizhenqiang.arithmetic.leetcode;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-
-@SpringBootTest
-class LeetcodeApplicationTests {
-
-	@Test
-	void contextLoads() {
-	}
-
-}
+//@SpringBootTest
+//class LeetcodeApplicationTests {
+//
+//	@Test
+//	void contextLoads() {
+//	}
+//
+//}

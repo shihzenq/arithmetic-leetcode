@@ -1,4 +1,4 @@
-package com.shizhenqiang.arithmetic.leetcode.day16;
+package com.shizhenqiang.arithmetic.leetcode.day16.nextPermutation;
 
 import java.util.Arrays;
 
@@ -19,9 +19,38 @@ import java.util.Arrays;
 public class NextPermutation {
 
     public static void main(String[] args) {
-        int[] array = new int[]{1, 2, 3, 4, 5};
-        nextPermutationOne(array);
+        int[] array = new int[]{5,4,3,2,1};
+//        nextPermutationOne(array);
+//        System.out.println(Arrays.toString(array));
+        nextPermutationTwo(array);
         System.out.println(Arrays.toString(array));
+    }
+
+    private static void nextPermutationTwo(int[] nums) {
+        int changeIndex = nums.length - 2;
+        while (changeIndex >= 0){
+            if (nums[changeIndex] < nums[changeIndex+1]){
+                break;
+            }
+            changeIndex --;
+        }
+        if (changeIndex < 0){
+            Arrays.sort(nums);
+            return;
+        }
+
+        int changeTarget = nums.length - 1;
+        while (nums[changeTarget] <= nums[changeIndex] && changeIndex < changeTarget){
+            changeTarget --;
+        }
+        if (changeTarget == changeIndex){
+            Arrays.sort(nums);
+            return;
+        }
+        int tmp = nums[changeIndex];
+        nums[changeIndex] = nums[changeTarget];
+        nums[changeTarget] = tmp;
+        Arrays.sort(nums,changeIndex+1,nums.length);
     }
 
     private static void nextPermutationOne(int[] array) {

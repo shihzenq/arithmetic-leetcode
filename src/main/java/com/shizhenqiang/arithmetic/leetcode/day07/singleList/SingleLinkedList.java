@@ -1,4 +1,4 @@
-package com.shizhenqiang.arithmetic.leetcode.day07;
+package com.shizhenqiang.arithmetic.leetcode.day07.singleList;
 
 /**
  * 实现单链表

@@ -1,4 +1,4 @@
-package com.shizhenqiang.arithmetic.leetcode.fourweek;
+package com.shizhenqiang.arithmetic.leetcode.fourweek.generateParenthesis;
 
 
 import java.util.ArrayList;

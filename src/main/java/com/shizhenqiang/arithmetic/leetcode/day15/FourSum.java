@@ -1,6 +1,5 @@
 package com.shizhenqiang.arithmetic.leetcode.day15;
 
-import javax.naming.PartialResultException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

@@ -25,18 +25,38 @@ import java.util.Arrays;
  * <p>
  * https://leetcode-cn.com/problems/coin-change/
  */
-public class CoinChange {
+public class CoinChangeTwo {
 
     public static void main(String[] args) {
-        CoinChange coinChange = new CoinChange();
-        int i = coinChange.coinChangeOne(new int[]{1}, 0);
+        CoinChangeTwo coinChange = new CoinChangeTwo();
+        int i = coinChange.coinChangeOne(new int[]{1, 2, 5}, 11);
         System.out.println(i);
-        i= coinChange.coinChangeTwo(new int[]{1, 2, 5}, 11);
+        i = coinChange.coinChangeTwo(new int[]{1, 2, 5}, 11);
         System.out.println(i);
     }
 
-    public int coinChangeOne(int[] coins, int amount) {
-        return helper(coins, amount, new int[amount]);
+    private int coinChangeTwo(int[] coins, int amount) {
+        if (amount < 0) return -1;
+        else if (amount == 0) return 0;
+        int[] dp = new int[amount + 1];
+        Arrays.sort(coins);
+        int sum = 0;
+        while (++sum <= amount) {
+            int min = -1;
+            for (int coin : coins) {
+                if (sum < coin) break;
+                if (dp[sum - coin] != -1) {
+                    int temp = dp[sum - coin] + 1;
+                    min = min <  0 ? temp : Math.min(temp, min);
+                }
+            }
+            dp[sum] = min;
+        }
+        return dp[amount];
+    }
+
+    private int coinChangeOne(int[] coins, int amount) {
+        return helper(coins, amount, new int[amount + 1]);
     }
 
     private int helper(int[] coins, int amount, int[] count) {
@@ -52,30 +72,5 @@ public class CoinChange {
         }
         count[amount - 1] = min == Integer.MAX_VALUE ? -1 : min;
         return count[amount - 1];
-    }
-
-    /**
-     * https://leetcode-cn.com/problems/coin-change/solution/322-ling-qian-dui-huan-by-leetcode-solution/
-     * @param coins
-     * @param amount
-     * @return
-     */
-    private int coinChangeTwo(int[] coins, int amount) {
-        if (amount < 1) return 0;
-        int[] dp = new int[amount + 1];
-        int sum = 0;
-        Arrays.sort(coins);
-        while (++sum <= amount) {
-            int min = -1;
-            for (int coin : coins) {
-                if (sum < coin) break;
-                if (dp[sum - coin] != -1) {
-                    int temp = dp[sum - coin] + 1;
-                    min = min < 0 ? temp : (Math.min(temp, min));
-                }
-            }
-            dp[sum] = min;
-        }
-        return dp[amount];
     }
 }

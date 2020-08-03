@@ -39,6 +39,8 @@ public class maxProfitII {
         maxProfitII maxProfitII = new maxProfitII();
         int maxProfit = maxProfitII.maxProfit(new int[]{7, 1, 5, 3, 6, 4});
         System.out.println(maxProfit);
+
+        System.out.println(System.clearProperty("sun.arch.data.model"));
     }
 
     public int maxProfit(int[] prices) {
